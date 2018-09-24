@@ -1,0 +1,16 @@
+{
+  "name": "crud-koa-example",
+  "version": "1.0.0",
+  "description": "A crud with koa and mongodb",
+  "main": "app.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/italosestilon/crud-koa-example.git"
+  },
+  "dependencies": {
+    "babel-register": "6.26.0",
+    "koa": "2.5.3",
+    "mongoose": "5.2.17"
+  }
+}
