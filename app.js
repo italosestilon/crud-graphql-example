@@ -1,13 +1,17 @@
 const Koa = require('koa');
 const app = new Koa();
 
-//connecting to mongodb
+//getting data access configurations
+const config = require('config');
+
 var mongoose = require('mongoose');
+
+//connecting to mongodb
 mongoose.connect(
-	'mongodb://ds211083.mlab.com:11083/entria-chanllenge-songs', 
+	config.dbHost, 
 	{
-		user : 'server-entria-challenge',
-		pass : 'NoitesSombrias19',
+		user : config.user,
+		pass : config.password,
 		useNewUrlParser : true
 	});
 
