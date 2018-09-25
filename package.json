@@ -11,7 +11,19 @@
   "dependencies": {
     "babel-register": "6.26.0",
     "config": "^2.0.1",
+    "graphql": "^14.0.2",
     "koa": "2.5.3",
+    "koa-bodyparser": "^4.2.1",
+    "koa-graphql": "^0.7.5",
+    "koa-router": "^7.4.0",
     "mongoose": "5.2.17"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^1.18.4"
+  },
+  "scripts": {
+    "babel": "nodemon --exec babel-node app.js"
   }
 }

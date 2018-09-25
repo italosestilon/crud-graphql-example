@@ -1,10 +1,15 @@
-const Koa = require('koa');
-const app = new Koa();
+import "babel-polyfill"
+import Koa from 'koa';
+
+import graphqlHttp from 'koa-graphql';
+import {schema} from './schemas/schema';
 
 //getting data access configurations
-const config = require('config');
+import config from 'config';
 
-var mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
+const app = new Koa();
 
 //connecting to mongodb
 mongoose.connect(
@@ -16,12 +21,17 @@ mongoose.connect(
 	});
 
 //getting the connection
-var db = mongoose.connection;
+const db = mongoose.connection;
 
 mongoose.Promise = global.Promise;
 
 db.on('error', console.error.bind(console, 'We had an error:'));
 db.once('open', console.log.bind(console, "We're connected to mongodb :)"));
+
+app.use(graphqlHttp({
+  schema,
+  graphiql: true
+}));
 
 //listen on port 3000
 app.listen(3000);
