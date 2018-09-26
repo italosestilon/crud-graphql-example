@@ -3,7 +3,8 @@ import Artist from '../models/artist';
 
 import {
 	GraphQLString, 
-	GraphQLNonNull
+	GraphQLNonNull,
+	GraphQLList
 } from 'graphql';
 
 const mutations = {
@@ -17,13 +18,52 @@ const mutations = {
 
 		resolve: async (root, input) => {
 			const artist = new Artist(input);
-			const newArtist = await artist.save();
 
-			if(!newArtist) {
-				throw new Error('Error');
+			try{
+				return await artist.save();
+			} catch (error) {
+				throw new Error(error);
 			}
+		}
+	},
 
-			return newArtist;
+	updateArtist: {
+		type: ArtistType,
+		args: {
+			id: {
+				type: new GraphQLNonNull(GraphQLString)
+			},
+			name: {
+				type: new GraphQLNonNull(GraphQLString)
+			},
+			albuns: {
+				type: new GraphQLList(GraphQLString)
+			}
+		},
+
+		resolve: async (root, input) => {
+			try{
+				return await Artist.findByIdAndUpdate(input.id, input, {new: true});
+			} catch (error) {
+				throw Error(error);
+			}
+		}
+	},
+
+	deleteArtist: {
+		type: ArtistType,
+		args: {
+			id: {
+				type: new GraphQLNonNull(GraphQLString)
+			}
+		},
+
+		resolve: async (root, input) => {
+			try{
+				return await Artist.findByIdAndRemove(input.id);
+			} catch (error) {
+				throw Error(error);
+			}
 		}
 	}
 }
