@@ -29,8 +29,8 @@ db.on('error', console.error.bind(console, 'We had an error:'));
 db.once('open', console.log.bind(console, "We're connected to mongodb :)"));
 
 app.use(graphqlHttp({
-  schema,
-  graphiql: true
+	schema,
+	graphiql: true
 }));
 
 //listen on port 3000

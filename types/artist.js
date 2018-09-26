@@ -1,15 +1,15 @@
 import {
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLNonNull,
-  GraphQLBoolean,
-  GraphQLInt,
-  GraphQLEnumType,
-  GraphQLFloat,
-  GraphQLList,
+	GraphQLObjectType,
+	GraphQLString,
+	GraphQLNonNull,
+	GraphQLBoolean,
+	GraphQLInt,
+	GraphQLEnumType,
+	GraphQLFloat,
+	GraphQLList,
 } from 'graphql';
 
-import AlbumType from './albumType';
+import AlbumType from './album';
 
 const ArtistType = new GraphQLObjectType({
 	name: 'Artist',

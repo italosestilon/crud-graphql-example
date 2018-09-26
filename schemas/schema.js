@@ -1,27 +1,12 @@
-import {
-  GraphQLSchema,
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLInt,
-  GraphQLList,
-  GraphQLNonNull,
-} from 'graphql';
+import {GraphQLSchema} from 'graphql';
 
-import ArtistType from '../models/artistType';
+import ArtistType from '../types/artist';
 import Artist from '../models/artist';
 
-const QueryType = new GraphQLObjectType({
-	name: 'Query',
-	fields: () => ({
-		artists: {
-			type: new GraphQLList(ArtistType),
-			resolve: async () => {
-				return await Artist.find({});
-			}
-		}
-	})
-});
+import QueryType from '../queries/index';
+import MutationType from '../mutations/index';
 
 export const schema = new GraphQLSchema({
-	query: QueryType
+	query: QueryType,
+	mutation: MutationType
 });
