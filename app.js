@@ -1,4 +1,3 @@
-import "babel-polyfill"
 import Koa from 'koa';
 
 import graphqlHttp from 'koa-graphql';
@@ -18,7 +17,8 @@ mongoose.connect(
 		user : config.user,
 		pass : config.password,
 		useNewUrlParser : true
-	});
+	}
+);
 
 //getting the connection
 const db = mongoose.connection;
