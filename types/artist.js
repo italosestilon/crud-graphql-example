@@ -1,25 +1,24 @@
 import {
-	GraphQLObjectType,
-	GraphQLString,
-	GraphQLNonNull,
-	GraphQLBoolean,
-	GraphQLInt,
-	GraphQLEnumType,
-	GraphQLFloat,
-	GraphQLList,
-} from 'graphql';
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLNonNull,
+  GraphQLBoolean,
+  GraphQLInt,
+  GraphQLEnumType,
+  GraphQLFloat,
+  GraphQLList
+} from "graphql";
 
-import AlbumType from './album';
+import AlbumType from "./album";
 
 const ArtistType = new GraphQLObjectType({
-	name: 'Artist',
+  name: "Artist",
 
-	fields: () => ({
-		id		: {type: new GraphQLNonNull(GraphQLString)},
-		name	: {type: new GraphQLNonNull(GraphQLString)},
-		albuns	: {type: new GraphQLList(AlbumType)}
-	})
-	
+  fields: () => ({
+    id: { type: new GraphQLNonNull(GraphQLString) },
+    name: { type: new GraphQLNonNull(GraphQLString) },
+    albuns: { type: new GraphQLList(AlbumType) }
+  })
 });
 
 export default ArtistType;
