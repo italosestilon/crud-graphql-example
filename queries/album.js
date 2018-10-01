@@ -7,7 +7,7 @@ const queries = {
   albuns: {
     type: new GraphQLList(AlbumType),
     resolve: async () => {
-      return await Album.find({}).populate("artists");
+      return await Album.find({});
     }
   }
 };

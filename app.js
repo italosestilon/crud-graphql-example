@@ -8,6 +8,8 @@ import config from "config";
 
 import mongoose from "mongoose";
 
+import loaders from "./loaders/index";
+
 const app = new Koa();
 
 //connecting to mongodb
@@ -31,6 +33,7 @@ db.once("open", console.log.bind(console, "We're connected to mongodb :)"));
 app.use(
   graphqlHttp({
     schema,
+    context: { loaders },
     graphiql: true
   })
 );
