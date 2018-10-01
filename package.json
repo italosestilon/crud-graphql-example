@@ -39,7 +39,21 @@
   "scripts": {
     "babel": "nodemon --exec babel-node app.js",
     "pretest": "eslint --ignore-path .gitignore .",
-    "test": "jest",
+    "test": "jest --runInBand",
     "prettier-watch": "onchange '**/*.js' -- prettier --use-tabs --write {{changed}}"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "./dist"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "html"
+    ],
+    "moduleNameMapper": {
+      "^mongoose$": "<rootDir>/node_modules/mongoose"
+    }
   }
 }

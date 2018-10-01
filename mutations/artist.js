@@ -1,5 +1,6 @@
 import ArtistType from "../types/artist";
 import Artist from "../models/artist";
+import Album from "../models/album";
 
 import { GraphQLString, GraphQLNonNull, GraphQLList } from "graphql";
 
@@ -18,7 +19,7 @@ const mutations = {
       try {
         return await artist.save();
       } catch (error) {
-        throw new Error("Valodat");
+        throw new Error(error);
       }
     }
   },
@@ -32,7 +33,7 @@ const mutations = {
       name: {
         type: new GraphQLNonNull(GraphQLString)
       },
-      albuns: {
+      albums: {
         type: new GraphQLList(GraphQLString)
       }
     },
@@ -56,7 +57,7 @@ const mutations = {
 
     resolve: async (root, input) => {
       try {
-        return await Artist.findByIdAndRemove(input.id);
+        return await Artist.findByIdAndDelete(input.id);
       } catch (error) {
         throw Error(error);
       }

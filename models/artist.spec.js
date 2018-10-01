@@ -1,17 +1,19 @@
 import config from "config";
 import Artist from "./artist";
 
+import setupTest from "../test/setup";
+
 import mongoose from "mongoose";
 
-beforeAll(async () => {
-  await connect();
-});
+import { sanitizeObject } from "../test/helper";
+
+const Schema = mongoose.Schema;
 
 beforeEach(async () => {
-  await clearDatabase();
+  await setupTest();
 });
 
-afterEach(async () => {
+afterAll(async () => {
   await disconnect();
 });
 
@@ -24,24 +26,51 @@ it("should not save an empty artist", async () => {
   }
 });
 
-async function connect() {
-  mongoose.connect(
-    config.dbHost,
-    {
-      user: config.user,
-      pass: config.password,
-      useNewUrlParser: true
-    }
-  );
-}
-
-async function clearDatabase() {
+it("should save new artist", async () => {
   try {
-    await Artist.deleteMany().exec();
+    const artist = new Artist({
+      name: "Lana Del Rey"
+    });
+
+    await artist.save();
+
+    expect(sanitizeObject(artist._doc)).toMatchSnapshot();
   } catch (err) {
-    console.log(err);
+    expect(err).toMatchSnapshot();
   }
-}
+});
+
+it("should retrieve an artist", async () => {
+  try {
+    const artist = new Artist({
+      name: "Lana Del Rey"
+    });
+
+    await artist.save();
+
+    const retrievedArtist = await Artist.findById(artist.id);
+
+    expect(sanitizeObject(retrievedArtist._doc)).toMatchSnapshot();
+  } catch (err) {
+    expect(err).toMatchSnapshot();
+  }
+});
+
+it("should delete an artist and all her albums", async () => {
+  try {
+    const artist = new Artist({
+      name: "Lana Del Rey"
+    });
+
+    await artist.save();
+
+    const retrievedArtist = await Artist.deleteOne({ id: artist.id });
+
+    expect(sanitizeObject(retrievedArtist._doc)).toMatchSnapshot();
+  } catch (err) {
+    expect(err).toMatchSnapshot();
+  }
+});
 
 async function disconnect() {
   try {

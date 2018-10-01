@@ -17,7 +17,7 @@ const ArtistType = new GraphQLObjectType({
   fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLString) },
     name: { type: new GraphQLNonNull(GraphQLString) },
-    albuns: { type: new GraphQLList(AlbumType) }
+    albums: { type: new GraphQLList(AlbumType) }
   })
 });
 

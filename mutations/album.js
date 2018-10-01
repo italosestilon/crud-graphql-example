@@ -1,5 +1,6 @@
 import AlbumType from "../types/album";
 import Album from "../models/album";
+import Artist from "../models/artist";
 
 import { GraphQLString, GraphQLNonNull, GraphQLList } from "graphql";
 
@@ -17,7 +18,14 @@ const mutations = {
       const album = new Album(input);
 
       try {
-        return await album.save();
+        await album.save();
+
+        await Artist.updateMany(
+          { _id: { $in: album.artists } },
+          { $push: { albums: album.id } }
+        );
+
+        return album;
       } catch (error) {
         throw new Error(error);
       }
@@ -53,7 +61,12 @@ const mutations = {
 
     resolve: async (root, input) => {
       try {
-        return await Album.findByIdAndRemove(input.id);
+        const album = await Album.findByIdAndDelete(input.id);
+        await Artist.updateMany(
+          { _id: { $in: album.artists } },
+          { $pull: { albums: album.id } }
+        );
+        return album;
       } catch (error) {
         throw Error(error);
       }
