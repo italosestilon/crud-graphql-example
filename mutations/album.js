@@ -14,8 +14,8 @@ const mutations = {
       artists: { type: new GraphQLList(GraphQLString) }
     },
 
-    resolve: async (root, input) => {
-      const album = new Album(input);
+    resolve: async (obj, args) => {
+      const album = new Album(args);
 
       try {
         await album.save();
@@ -42,9 +42,15 @@ const mutations = {
       artists: { type: GraphQLString }
     },
 
-    resolve: async (root, input) => {
+    resolve: async (obj, args, { loaders }) => {
       try {
-        return await Album.findByIdAndUpdate(input.id, input, { new: true });
+        const album = await Album.findByIdAndUpdate(args.id, args, {
+          new: true
+        });
+
+        loaders.albumLoader.clear(args.id);
+
+        return album;
       } catch (error) {
         throw Error(error);
       }
@@ -59,13 +65,21 @@ const mutations = {
       }
     },
 
-    resolve: async (root, input) => {
+    resolve: async (obj, args, { loaders }) => {
       try {
-        const album = await Album.findByIdAndDelete(input.id);
+        const album = await Album.findByIdAndDelete(args.id);
+
+        loaders.albumLoader.clear(args.id);
+
         await Artist.updateMany(
           { _id: { $in: album.artists } },
           { $pull: { albums: album.id } }
         );
+
+        for (const i in album.artists) {
+          loaders.artistLoader.clear(album.artists[i].id);
+        }
+
         return album;
       } catch (error) {
         throw Error(error);

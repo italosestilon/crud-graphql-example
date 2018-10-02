@@ -13,9 +13,8 @@ const mutations = {
       }
     },
 
-    resolve: async (root, input) => {
-      const artist = new Artist(input);
-
+    resolve: async (obj, args) => {
+      const artist = new Artist(argst);
       try {
         return await artist.save();
       } catch (error) {
@@ -38,9 +37,16 @@ const mutations = {
       }
     },
 
-    resolve: async (root, input) => {
+    resolve: async (obj, args, { loaders }) => {
       try {
-        return await Artist.findByIdAndUpdate(input.id, input, { new: true });
+        const artist = await Artist.findByIdAndUpdate(args.id, args, {
+          new: true
+        });
+
+        loaders.artistLoader.clear(args.id);
+        //loaders.artistLoader.prime(args.id, artist);
+
+        return artist;
       } catch (error) {
         throw Error(error);
       }
@@ -54,10 +60,13 @@ const mutations = {
         type: new GraphQLNonNull(GraphQLString)
       }
     },
-
-    resolve: async (root, input) => {
+    resolve: async (obj, args) => {
       try {
-        return await Artist.findByIdAndDelete(input.id);
+        const artist = await Artist.findByIdAndDelete(args.id);
+
+        loaders.artistLoader.clear(args.id);
+
+        return artist;
       } catch (error) {
         throw Error(error);
       }

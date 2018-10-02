@@ -8,7 +8,7 @@ import config from "config";
 
 import mongoose from "mongoose";
 
-import loaders from "./loaders/index";
+import createLoaders from "./loaders/index";
 
 const app = new Koa();
 
@@ -30,13 +30,16 @@ mongoose.Promise = global.Promise;
 db.on("error", console.error.bind(console, "We had an error:"));
 db.once("open", console.log.bind(console, "We're connected to mongodb :)"));
 
-app.use(
-  graphqlHttp({
+const graphiqlSettingsPerRequest = async () => {
+  const loaders = createLoaders();
+  return {
     schema,
     context: { loaders },
     graphiql: true
-  })
-);
+  };
+};
+
+app.use(graphqlHttp(graphiqlSettingsPerRequest));
 
 //listen on port 3000
 app.listen(3000);

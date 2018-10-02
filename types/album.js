@@ -23,8 +23,8 @@ const AlbumType = new GraphQLObjectType({
     songs: { type: new GraphQLList(GraphQLString) },
     artists: {
       type: new GraphQLList(ArtistType),
-      resolve: async album => {
-        return await Artist.find({ _id: { $in: album.artists } });
+      resolve: async (album, args, { loaders }) => {
+        return loaders.artistLoader.loadMany(album.artists);
       }
     }
   })

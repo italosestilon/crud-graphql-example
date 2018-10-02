@@ -1,13 +1,25 @@
 import AlbumType from "../types/album";
 import Album from "../models/album";
 
-import { GraphQLList } from "graphql";
+import { GraphQLList, GraphQLNonNull, GraphQLID } from "graphql";
 
 const queries = {
-  albuns: {
+  albums: {
     type: new GraphQLList(AlbumType),
     resolve: async () => {
-      return await Album.find({});
+      return Album.find({});
+    }
+  },
+
+  album: {
+    type: AlbumType,
+    args: {
+      id: {
+        type: new GraphQLNonNull(GraphQLID)
+      }
+    },
+    resolve: async (obj, args, { loaders }) => {
+      return loaders.albumLoader.load(args.id);
     }
   }
 };

@@ -21,8 +21,8 @@ const ArtistType = new GraphQLObjectType({
     name: { type: new GraphQLNonNull(GraphQLString) },
     albums: {
       type: new GraphQLList(AlbumType),
-      resolve: async (artist, _args, { loaders }) => {
-        return await loaders.albumLoader.load(artist.albums);
+      resolve: async (artist, args, { loaders }) => {
+        return loaders.albumLoader.loadMany(artist.albums);
       }
     }
   })

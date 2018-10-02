@@ -1,9 +1,9 @@
-import artistLoader from "./artist";
-import albumLoader from "./album";
+import createArtistLoader from "./artist";
+import createAlbumLoader from "./album";
 
-const loaders = {
-  artistLoader: artistLoader,
-  albumLoader: albumLoader
+export default () => {
+  return {
+    artistLoader: createArtistLoader(),
+    albumLoader: createAlbumLoader()
+  };
 };
-
-export default loaders;
