@@ -17,6 +17,8 @@ const mutations = {
     resolve: async (obj, args) => {
       const album = new Album(args);
 
+      const promise = album.save()
+
       try {
         await album.save();
 

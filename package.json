@@ -35,25 +35,29 @@
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^23.6.0",
     "jest-cli": "^23.6.0",
+    "jest-environment-node": "^23.4.0",
     "nodemon": "^1.18.4",
     "prettier": "1.14.3"
   },
   "scripts": {
     "babel": "nodemon --exec babel-node app.js",
-    "pretest": "eslint --ignore-path .gitignore .",
-    "test": "jest --runInBand",
+    "pretest": "eslint --fix --ignore-path .gitignore .",
+    "test": "jest",
     "prettier-watch": "onchange '**/*.js' -- prettier --use-tabs --write {{changed}}"
   },
   "jest": {
-    "testEnvironment": "node",
+    "testEnvironment": "./test/environment/mongodb",
+    "resetModules": true,
     "testPathIgnorePatterns": [
-      "/node_modules/",
-      "./dist"
+      "node_modules/"
     ],
     "coverageReporters": [
       "lcov",
       "html"
     ],
+    "transform": {
+      "^.+\\.js?$": "./node_modules/babel-jest"
+    },
     "moduleNameMapper": {
       "^mongoose$": "<rootDir>/node_modules/mongoose"
     }

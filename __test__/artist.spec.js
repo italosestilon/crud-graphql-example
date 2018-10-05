@@ -1,21 +1,35 @@
 import config from "config";
-import Artist from "./artist";
+import Artist from "../models/artist";
 
-import setupTest from "../test/setup";
+import { connect, clearDatabase, disconnect } from "../test/setup";
 
 import mongoose from "mongoose";
 
 import { sanitizeObject } from "../test/helper";
 
-const Schema = mongoose.Schema;
+beforeAll(async () => {
+  try {
+    await connect();
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 beforeEach(async () => {
-  await setupTest();
+  try {
+    await clearDatabase();
+  } catch (err) {
+    console.log(err);
+  }
 });
 
-afterAll(async () => {
-  await disconnect();
-});
+/*afterAll(async () => {
+  try {
+    await disconnect();
+  } catch (err) {
+    console.log(err);
+  }
+});*/
 
 it("should not save an empty artist", async () => {
   try {
@@ -33,6 +47,8 @@ it("should save new artist", async () => {
     });
 
     await artist.save();
+
+    console.log(artist._doc);
 
     expect(sanitizeObject(artist._doc)).toMatchSnapshot();
   } catch (err) {
@@ -64,18 +80,12 @@ it("should delete an artist and all her albums", async () => {
 
     await artist.save();
 
-    const retrievedArtist = await Artist.deleteOne({ id: artist.id });
+    const retrievedArtist = await Artist.findByIdAndDelete(artist.id);
+
+    console.log(retrievedArtist._doc);
 
     expect(sanitizeObject(retrievedArtist._doc)).toMatchSnapshot();
   } catch (err) {
     expect(err).toMatchSnapshot();
   }
 });
-
-async function disconnect() {
-  try {
-    await mongoose.disconnect();
-  } catch (err) {
-    console.log(err);
-  }
-}
