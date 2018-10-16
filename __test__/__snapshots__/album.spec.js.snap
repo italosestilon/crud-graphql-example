@@ -1,3 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should delete an artist 1`] = `
+Object {
+  "__v": 0,
+  "_id": "ObjectId",
+  "artists": Array [
+    "ObjectId",
+  ],
+  "release_date": Object {},
+  "songs": Array [
+    "Video Games",
+    "Born to Die",
+    "Summertime Sadness",
+  ],
+  "title": "Born to Die",
+}
+`;
+
 exports[`should not save an empty album 1`] = `[ValidationError: Album validation failed: release_date: Path \`release_date\` is required., title: Path \`title\` is required.]`;
+
+exports[`should retrieve an album 1`] = `
+Object {
+  "__v": 0,
+  "_id": "ObjectId",
+  "artists": Array [
+    "ObjectId",
+  ],
+  "release_date": Object {},
+  "songs": Array [
+    "Video Games",
+    "Born to Die",
+    "Summertime Sadness",
+  ],
+  "title": "Born to Die",
+}
+`;
+
+exports[`should save new album 1`] = `
+Object {
+  "__v": 0,
+  "_id": "ObjectId",
+  "artists": Array [
+    "ObjectId",
+  ],
+  "release_date": Object {},
+  "songs": Array [
+    "Video Games",
+    "Born to Die",
+    "Summertime Sadness",
+  ],
+  "title": "Born to Die",
+}
+`;

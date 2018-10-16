@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should delete an artist and all her albums 1`] = `
+exports[`should delete an artist 1`] = `
 Object {
   "__v": 0,
   "_id": "ObjectId",

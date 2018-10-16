@@ -8,7 +8,7 @@ export async function connect() {
   }*/
   console.debug("Creating connection");
   mongoose.Promise = Promise;
-  console.log(global.__MONGO_URI__);
+  console.debug(global.__MONGO_URI__);
   jest.setTimeout(20000);
   return mongoose.connect(
     global.__MONGO_URI__,
@@ -70,7 +70,6 @@ const sanitizeValue = value => {
 };
 
 export const sanitizeObject = object => {
-  console.log(object);
   return Object.keys(object).reduce((sanitized, key) => {
     const value = object[key];
 
