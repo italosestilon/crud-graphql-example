@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import createLoaders from "../loaders/index";
+
 const { ObjectId } = mongoose.Types;
 
 export async function connect() {
@@ -43,6 +45,9 @@ export async function disconnect() {
 }
 
 const sanitizeValue = value => {
+  if (!value) {
+    return value;
+  }
   if (!Array.isArray(value) && typeof value.toString === "function") {
     // Remove any non-alphanumeric character from value
     const cleanValue = value.toString().replace(/[^a-z0-9]/gi, "");
@@ -70,6 +75,12 @@ const sanitizeValue = value => {
 };
 
 export const sanitizeObject = object => {
+  if (!object) {
+    return object;
+  }
+  if (object._doc) {
+    object = object._doc;
+  }
   return Object.keys(object).reduce((sanitized, key) => {
     const value = object[key];
 
@@ -80,4 +91,13 @@ export const sanitizeObject = object => {
       [key]: sanitizedValue
     };
   }, {});
+};
+
+export const getContext = context => {
+  const loaders = createLoaders();
+
+  return {
+    ...context,
+    loaders
+  };
 };

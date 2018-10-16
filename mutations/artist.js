@@ -14,7 +14,7 @@ const mutations = {
     },
 
     resolve: async (obj, args) => {
-      const artist = new Artist(argst);
+      const artist = new Artist(args);
       try {
         return await artist.save();
       } catch (error) {
@@ -60,7 +60,7 @@ const mutations = {
         type: new GraphQLNonNull(GraphQLString)
       }
     },
-    resolve: async (obj, args) => {
+    resolve: async (obj, args, { loaders }) => {
       try {
         const artist = await Artist.findByIdAndDelete(args.id);
 

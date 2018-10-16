@@ -1,6 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should delete an artist 1`] = `
+exports[`Grapql API shoud save an artist 1`] = `
+Object {
+  "createArtist": Object {
+    "albums": Array [],
+    "id": "ObjectId",
+    "name": "Lana Del Rey",
+  },
+}
+`;
+
+exports[`Grapql API shoud save an artist 2`] = `
 Object {
   "__v": 0,
   "_id": "ObjectId",
@@ -9,9 +19,48 @@ Object {
 }
 `;
 
-exports[`should not save an empty artist 1`] = `[ValidationError: Artist validation failed: name: Path \`name\` is required.]`;
+exports[`Grapql API shoud update an artist 1`] = `
+Object {
+  "updateArtist": Object {
+    "albums": Array [],
+    "id": "ObjectId",
+    "name": "Lana Del Rey (Queen of the Universe)",
+  },
+}
+`;
 
-exports[`should retrieve an artist 1`] = `
+exports[`Grapql API shoud update an artist 2`] = `
+Object {
+  "__v": 0,
+  "_id": "ObjectId",
+  "albums": Array [],
+  "name": "Lana Del Rey (Queen of the Universe)",
+}
+`;
+
+exports[`Grapql API should delete an artist 1`] = `
+Object {
+  "deleteArtist": Object {
+    "albums": Array [],
+    "id": "ObjectId",
+    "name": "Lana Del Rey",
+  },
+}
+`;
+
+exports[`Grapql API should delete an artist 2`] = `null`;
+
+exports[`Grapql API should retrieve an artist 1`] = `
+Object {
+  "artist": Object {
+    "albums": Array [],
+    "id": "ObjectId",
+    "name": "Lana Del Rey",
+  },
+}
+`;
+
+exports[`Model should delete an artist 1`] = `
 Object {
   "__v": 0,
   "_id": "ObjectId",
@@ -20,7 +69,18 @@ Object {
 }
 `;
 
-exports[`should save new artist 1`] = `
+exports[`Model should not save an empty artist 1`] = `[ValidationError: Artist validation failed: name: Path \`name\` is required.]`;
+
+exports[`Model should retrieve an artist 1`] = `
+Object {
+  "__v": 0,
+  "_id": "ObjectId",
+  "albums": Array [],
+  "name": "Lana Del Rey",
+}
+`;
+
+exports[`Model should save new artist 1`] = `
 Object {
   "__v": 0,
   "_id": "ObjectId",
