@@ -1,6 +1,47 @@
 import mongoose from "mongoose";
 const { ObjectId } = mongoose.Types;
 
+export async function connect() {
+  /*if (mongoose.connection.readyState !== 0) {
+    console.log("Connection already alive.");
+    return;
+  }*/
+  console.debug("Creating connection");
+  mongoose.Promise = Promise;
+  console.log(global.__MONGO_URI__);
+  jest.setTimeout(20000);
+  return mongoose.connect(
+    global.__MONGO_URI__,
+    {
+      dbName: global.__MONGO_DB_NAME__,
+      useNewUrlParser: true,
+      autoIndex: false,
+      autoReconnect: false,
+      connectTimeoutMS: 10000
+    }
+  );
+}
+
+export async function clearDatabase() {
+  console.debug("Clearing database");
+  try {
+    await mongoose.connection.db.dropDatabase();
+  } catch (err) {
+    console.error("Error while dropping database.");
+    throw err;
+  }
+}
+
+export async function disconnect() {
+  try {
+    console.debug("Disconnecting mongoose");
+    await mongoose.disconnect();
+  } catch (err) {
+    console.error("Error while disconnecting from mongodb.");
+    throw err;
+  }
+}
+
 const sanitizeValue = value => {
   if (!Array.isArray(value) && typeof value.toString === "function") {
     // Remove any non-alphanumeric character from value
@@ -29,6 +70,7 @@ const sanitizeValue = value => {
 };
 
 export const sanitizeObject = object => {
+  console.log(object);
   return Object.keys(object).reduce((sanitized, key) => {
     const value = object[key];
 

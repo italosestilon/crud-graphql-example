@@ -1,35 +1,20 @@
 import config from "config";
 import Artist from "../models/artist";
+import { graphql } from "graphql";
+import schema from "../schemas/schema";
 
-import { connect, clearDatabase, disconnect } from "../test/setup";
+import {
+  connect,
+  clearDatabase,
+  disconnect,
+  sanitizeObject
+} from "../test/helper";
 
 import mongoose from "mongoose";
 
-import { sanitizeObject } from "../test/helper";
-
-beforeAll(async () => {
-  try {
-    await connect();
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-beforeEach(async () => {
-  try {
-    await clearDatabase();
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-/*afterAll(async () => {
-  try {
-    await disconnect();
-  } catch (err) {
-    console.log(err);
-  }
-});*/
+beforeAll(connect);
+afterEach(clearDatabase);
+afterAll(disconnect);
 
 it("should not save an empty artist", async () => {
   try {
@@ -45,11 +30,8 @@ it("should save new artist", async () => {
     const artist = new Artist({
       name: "Lana Del Rey"
     });
-
     await artist.save();
-
-    console.log(artist._doc);
-
+    console.log(typeof artist);
     expect(sanitizeObject(artist._doc)).toMatchSnapshot();
   } catch (err) {
     expect(err).toMatchSnapshot();

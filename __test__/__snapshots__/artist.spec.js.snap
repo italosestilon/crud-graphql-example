@@ -1,9 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should delete an artist and all her albums 1`] = `[TypeError: Cannot read property 'Decimal128' of null]`;
+exports[`should delete an artist and all her albums 1`] = `
+Object {
+  "__v": 0,
+  "_id": "ObjectId",
+  "albums": Array [],
+  "name": "Lana Del Rey",
+}
+`;
 
-exports[`should not save an empty artist 1`] = `[TypeError: Cannot read property 'Decimal128' of null]`;
+exports[`should not save an empty artist 1`] = `[ValidationError: Artist validation failed: name: Path \`name\` is required.]`;
 
-exports[`should retrieve an artist 1`] = `[TypeError: Cannot read property 'Decimal128' of null]`;
+exports[`should retrieve an artist 1`] = `
+Object {
+  "__v": 0,
+  "_id": "ObjectId",
+  "albums": Array [],
+  "name": "Lana Del Rey",
+}
+`;
 
-exports[`should save new artist 1`] = `[TypeError: Cannot read property 'Decimal128' of null]`;
+exports[`should save new artist 1`] = `
+Object {
+  "__v": 0,
+  "_id": "ObjectId",
+  "albums": Array [],
+  "name": "Lana Del Rey",
+}
+`;
