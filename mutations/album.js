@@ -16,9 +16,6 @@ const mutations = {
 
     resolve: async (obj, args) => {
       const album = new Album(args);
-
-      const promise = album.save();
-
       try {
         await album.save();
 
@@ -40,17 +37,30 @@ const mutations = {
       id: { type: new GraphQLNonNull(GraphQLString) },
       title: { type: GraphQLString },
       release_date: { type: GraphQLString },
-      songs: { type: GraphQLString },
-      artists: { type: GraphQLString }
+      songs: { type: new GraphQLList(GraphQLString) },
+      artists: { type: new GraphQLList(GraphQLString) }
     },
 
     resolve: async (obj, args, { loaders }) => {
       try {
-        const album = await Album.findByIdAndUpdate(args.id, args, {
+        const album = await Album.findOneAndUpdate(args.id, args, {
           new: true
         });
-
         loaders.albumLoader.clear(args.id);
+
+        if (args.artists) {
+          //update artists' albums lists
+          await Artist.updateMany(
+            { _id: { $in: album.artists } },
+            { $addToSet: { albums: album.id } }
+          );
+
+          //I think this operation is very costly, this is just a naive solution.
+          await Artist.updateMany(
+            { _id: { $nin: album.artists } },
+            { $pull: { albums: album.id } }
+          );
+        }
 
         return album;
       } catch (error) {

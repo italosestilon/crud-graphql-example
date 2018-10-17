@@ -1,4 +1,5 @@
 import Artist from "../models/artist";
+import Album from "../models/album";
 import { graphql } from "graphql";
 
 import { schema } from "../schemas/schema";
@@ -68,7 +69,7 @@ describe("Model", () => {
   });
 });
 
-describe("Grapql API", () => {
+describe("Graphql API", () => {
   it("should retrieve an artist", async () => {
     try {
       const artist = new Artist({
@@ -88,7 +89,7 @@ describe("Grapql API", () => {
         }
       }
       `;
-      console.log(query);
+
       const rootValue = {};
       const context = getContext({});
       const result = await graphql(schema, query, rootValue, context);
@@ -185,7 +186,7 @@ describe("Grapql API", () => {
       const context = getContext({});
       const result = await graphql(schema, mutation, rootValue, context);
       const { data } = result;
-      console.log(data);
+
       const retrievedArtist = await Artist.findById(artist.id);
 
       expect(sanitizeObject(data)).toMatchSnapshot();

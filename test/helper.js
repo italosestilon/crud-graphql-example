@@ -8,9 +8,9 @@ export async function connect() {
     console.log("Connection already alive.");
     return;
   }*/
-  console.debug("Creating connection");
+  //console.debug("Creating connection");
   mongoose.Promise = Promise;
-  console.debug(global.__MONGO_URI__);
+  //console.debug(global.__MONGO_URI__);
   jest.setTimeout(20000);
   return mongoose.connect(
     global.__MONGO_URI__,
@@ -25,7 +25,7 @@ export async function connect() {
 }
 
 export async function clearDatabase() {
-  console.debug("Clearing database");
+  //console.debug("Clearing database");
   try {
     await mongoose.connection.db.dropDatabase();
   } catch (err) {
@@ -36,7 +36,7 @@ export async function clearDatabase() {
 
 export async function disconnect() {
   try {
-    console.debug("Disconnecting mongoose");
+    //console.debug("Disconnecting mongoose");
     await mongoose.disconnect();
   } catch (err) {
     console.error("Error while disconnecting from mongodb.");

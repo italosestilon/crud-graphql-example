@@ -64,6 +64,8 @@ const mutations = {
       try {
         const artist = await Artist.findByIdAndDelete(args.id);
 
+        await Album.deleteMany({ _id: { $in: artist.albums } });
+
         loaders.artistLoader.clear(args.id);
 
         return artist;

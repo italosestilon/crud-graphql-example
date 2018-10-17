@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Grapql API shoud save an artist 1`] = `
+exports[`Graphql API shoud save an artist 1`] = `
 Object {
   "createArtist": Object {
     "albums": Array [],
@@ -10,7 +10,7 @@ Object {
 }
 `;
 
-exports[`Grapql API shoud save an artist 2`] = `
+exports[`Graphql API shoud save an artist 2`] = `
 Object {
   "__v": 0,
   "_id": "ObjectId",
@@ -19,7 +19,7 @@ Object {
 }
 `;
 
-exports[`Grapql API shoud update an artist 1`] = `
+exports[`Graphql API shoud update an artist 1`] = `
 Object {
   "updateArtist": Object {
     "albums": Array [],
@@ -29,7 +29,7 @@ Object {
 }
 `;
 
-exports[`Grapql API shoud update an artist 2`] = `
+exports[`Graphql API shoud update an artist 2`] = `
 Object {
   "__v": 0,
   "_id": "ObjectId",
@@ -38,7 +38,7 @@ Object {
 }
 `;
 
-exports[`Grapql API should delete an artist 1`] = `
+exports[`Graphql API should delete an artist 1`] = `
 Object {
   "deleteArtist": Object {
     "albums": Array [],
@@ -48,9 +48,9 @@ Object {
 }
 `;
 
-exports[`Grapql API should delete an artist 2`] = `null`;
+exports[`Graphql API should delete an artist 2`] = `null`;
 
-exports[`Grapql API should retrieve an artist 1`] = `
+exports[`Graphql API should retrieve an artist 1`] = `
 Object {
   "artist": Object {
     "albums": Array [],

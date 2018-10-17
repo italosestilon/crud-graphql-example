@@ -1,6 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should delete an artist 1`] = `
+exports[`Graphql API shoud save an album 1`] = `
+Object {
+  "createAlbum": Object {
+    "artists": Array [
+      Object {
+        "id": "ObjectId",
+        "name": "Lana Del Rey",
+      },
+    ],
+    "id": "ObjectId",
+    "release_date": "1327629600000",
+    "songs": Array [
+      "Video Games",
+      "Born to Die",
+      "Summertime Sadness",
+    ],
+    "title": "Born to Die",
+  },
+}
+`;
+
+exports[`Graphql API shoud save an album 2`] = `
 Object {
   "__v": 0,
   "_id": "ObjectId",
@@ -17,9 +38,90 @@ Object {
 }
 `;
 
-exports[`should not save an empty album 1`] = `[ValidationError: Album validation failed: release_date: Path \`release_date\` is required., title: Path \`title\` is required.]`;
+exports[`Graphql API shoud update an album 1`] = `
+Object {
+  "updateAlbum": Object {
+    "artists": Array [
+      Object {
+        "id": "ObjectId",
+        "name": "Lana Del Rey",
+      },
+      Object {
+        "id": "ObjectId",
+        "name": "Marina and The Diamonds",
+      },
+    ],
+    "id": "ObjectId",
+    "release_date": "1327629600000",
+    "songs": Array [
+      "American",
+    ],
+    "title": "Born to Die - Paradise Edition",
+  },
+}
+`;
 
-exports[`should retrieve an album 1`] = `
+exports[`Graphql API shoud update an album 2`] = `
+Object {
+  "__v": 0,
+  "_id": "ObjectId",
+  "artists": Array [
+    "ObjectId",
+    "ObjectId",
+  ],
+  "release_date": Object {},
+  "songs": Array [
+    "American",
+  ],
+  "title": "Born to Die - Paradise Edition",
+}
+`;
+
+exports[`Graphql API should delete an album 1`] = `
+Object {
+  "deleteAlbum": Object {
+    "artists": Array [
+      Object {
+        "id": "ObjectId",
+        "name": "Lana Del Rey",
+      },
+    ],
+    "id": "ObjectId",
+    "release_date": "1327629600000",
+    "songs": Array [
+      "Video Games",
+      "Born to Die",
+      "Summertime Sadness",
+    ],
+    "title": "Born to Die",
+  },
+}
+`;
+
+exports[`Graphql API should delete an album 2`] = `null`;
+
+exports[`Graphql API should retrieve an album 1`] = `
+Object {
+  "album": Object {
+    "artists": Array [
+      Object {
+        "id": "ObjectId",
+        "name": "Lana Del Rey",
+      },
+    ],
+    "id": "ObjectId",
+    "release_date": "1327629600000",
+    "songs": Array [
+      "Video Games",
+      "Born to Die",
+      "Summertime Sadness",
+    ],
+    "title": "Born to Die",
+  },
+}
+`;
+
+exports[`Model should delete an album 1`] = `
 Object {
   "__v": 0,
   "_id": "ObjectId",
@@ -36,7 +138,26 @@ Object {
 }
 `;
 
-exports[`should save new album 1`] = `
+exports[`Model should not save an empty album 1`] = `[ValidationError: Album validation failed: release_date: Path \`release_date\` is required., title: Path \`title\` is required.]`;
+
+exports[`Model should retrieve an album 1`] = `
+Object {
+  "__v": 0,
+  "_id": "ObjectId",
+  "artists": Array [
+    "ObjectId",
+  ],
+  "release_date": Object {},
+  "songs": Array [
+    "Video Games",
+    "Born to Die",
+    "Summertime Sadness",
+  ],
+  "title": "Born to Die",
+}
+`;
+
+exports[`Model should save new album 1`] = `
 Object {
   "__v": 0,
   "_id": "ObjectId",
