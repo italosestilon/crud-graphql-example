@@ -10,6 +10,8 @@ import mongoose from "mongoose";
 
 import createLoaders from "./loaders/index";
 
+import {getUser} from "./auth";
+
 const app = new Koa();
 
 //connecting to mongodb
@@ -30,11 +32,12 @@ mongoose.Promise = global.Promise;
 db.on("error", console.error.bind(console, "We had an error:"));
 db.once("open", console.log.bind(console, "We're connected to mongodb :)"));
 
-const graphiqlSettingsPerRequest = async () => {
+const graphiqlSettingsPerRequest = async (req) => {
   const loaders = createLoaders();
+  const { user } = await getUser(req.header.authorization);
   return {
     schema,
-    context: { loaders },
+    context: { req, loaders, user },
     graphiql: true
   };
 };
