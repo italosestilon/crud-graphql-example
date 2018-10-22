@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Graphql API should change the password 1`] = `
+Object {
+  "changePassword": Object {
+    "error": null,
+    "me": Object {
+      "email": "delrey@email.com",
+      "name": "Lana Del Rey",
+    },
+  },
+}
+`;

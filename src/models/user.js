@@ -18,12 +18,12 @@ userSchema.pre("save", function(next) {
   next();
 });
 
-userSchema.methods.encryptPassword = function (plaintextPassword) {
+userSchema.methods.encryptPassword = function(plaintextPassword) {
   const saltRounds = 10;
   return bcrypt.hashSync(plaintextPassword, saltRounds);
 };
 
-userSchema.methods.authenticate = function (plaintextPassword) {
+userSchema.methods.authenticate = function(plaintextPassword) {
   return bcrypt.compareSync(plaintextPassword, this.password);
 };
 

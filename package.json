@@ -43,9 +43,10 @@
     "prettier": "1.14.3"
   },
   "scripts": {
-    "babel": "nodemon --exec babel-node app.js",
+    "babel": "nodemon --exec babel-node src/app.js",
     "pretest": "eslint --fix --ignore-path .gitignore .",
     "test": "jest",
+    "test:wacth": "jest --watch",
     "prettier-watch": "onchange '**/*.js' -- prettier --use-tabs --write {{changed}}"
   },
   "jest": {

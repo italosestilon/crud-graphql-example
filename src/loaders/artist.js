@@ -9,8 +9,8 @@ export default () => {
       const artistsById = _.indexBy(artists, "_id");
       return artistIds.map(artistId => artistsById[artistId]);
     } catch (err) {
-      console.log(err);
-      throw err;
+      console.error(err.message);
+      throw "Internal Error: " + err.message;
     }
   });
 };

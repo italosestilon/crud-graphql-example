@@ -10,7 +10,7 @@ import {
   disconnect,
   sanitizeObject,
   getContext
-} from "../test/helper";
+} from "../../test/helper";
 
 beforeAll(connect);
 afterEach(clearDatabase);
@@ -61,7 +61,9 @@ describe("Model", () => {
       });
 
       await artist.save();
-      const retrievedArtist = await Artist.findByIdAndDelete(artist.id);
+      const retrievedArtist = await Artist.findOneAndDelete({
+        _id: artist.id
+      });
       expect(sanitizeObject(retrievedArtist._doc)).toMatchSnapshot();
     } catch (err) {
       expect(err).toMatchSnapshot();

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import createLoaders from "../loaders/index";
+import createLoaders from "../src/loaders/index";
 
 const { ObjectId } = mongoose.Types;
 
@@ -17,6 +17,7 @@ export async function connect() {
     {
       dbName: global.__MONGO_DB_NAME__,
       useNewUrlParser: true,
+      useCreateIndex: true,
       autoIndex: false,
       autoReconnect: false,
       connectTimeoutMS: 10000

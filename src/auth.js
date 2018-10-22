@@ -3,9 +3,9 @@ import config from "config";
 import User from "./models/user";
 
 export async function getUser(token) {
-  if(!token) {
-    return {user: null}
-  };
+  if (!token) {
+    return { user: null };
+  }
 
   try {
     const decoded = jwt.verify(token.substring(4), config.jwtSecret);

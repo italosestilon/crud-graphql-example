@@ -10,7 +10,7 @@ import mongoose from "mongoose";
 
 import createLoaders from "./loaders/index";
 
-import {getUser} from "./auth";
+import { getUser } from "./auth";
 
 const app = new Koa();
 
@@ -20,7 +20,8 @@ mongoose.connect(
   {
     user: config.user,
     pass: config.password,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useCreateIndex: true
   }
 );
 
@@ -32,7 +33,7 @@ mongoose.Promise = global.Promise;
 db.on("error", console.error.bind(console, "We had an error:"));
 db.once("open", console.log.bind(console, "We're connected to mongodb :)"));
 
-const graphiqlSettingsPerRequest = async (req) => {
+const graphqlSettingsPerRequest = async req => {
   const loaders = createLoaders();
   const { user } = await getUser(req.header.authorization);
   return {
@@ -42,7 +43,7 @@ const graphiqlSettingsPerRequest = async (req) => {
   };
 };
 
-app.use(graphqlHttp(graphiqlSettingsPerRequest));
+app.use(graphqlHttp(graphqlSettingsPerRequest));
 
 //listen on port 3000
 app.listen(3000);

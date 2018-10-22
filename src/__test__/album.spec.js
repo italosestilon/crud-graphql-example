@@ -1,4 +1,3 @@
-import config from "config";
 import Album from "../models/album";
 import Artist from "../models/artist";
 
@@ -11,7 +10,7 @@ import {
   disconnect,
   sanitizeObject,
   getContext
-} from "../test/helper";
+} from "../../test/helper";
 
 beforeAll(connect);
 afterEach(clearDatabase);

@@ -39,7 +39,7 @@ const mutations = {
 
     resolve: async (obj, args, { loaders }) => {
       try {
-        const artist = await Artist.findByIdAndUpdate(args.id, args, {
+        const artist = await Artist.findOneAndUpdate({ _id: args.id }, args, {
           new: true
         });
 

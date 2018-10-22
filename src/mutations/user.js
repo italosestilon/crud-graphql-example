@@ -68,7 +68,7 @@ const mutations = {
     resolve: async (obj, { input }) => {
       const { name, email, password } = input;
       let user = await User.findOne({ email: email.toLowerCase() });
-      console.log(user);
+
       if (user) {
         return {
           error: "Email already registered."
@@ -90,9 +90,9 @@ const mutations = {
       input: { type: new GraphQLNonNull(UserLoginWithEmailInput) }
     },
     resolve: async (obj, { input }) => {
-      const {email, password } = input;
+      const { email, password } = input;
 
-      const user = await User.findOne({email: email.toLowerCase()});
+      const user = await User.findOne({ email: email.toLowerCase() });
 
       const defaultErrorMessage = "Password or email are incorrect.";
 
@@ -104,7 +104,7 @@ const mutations = {
 
       const isCorrectPassword = user.authenticate(password);
 
-      if(!isCorrectPassword){
+      if (!isCorrectPassword) {
         return {
           error: defaultErrorMessage
         };
@@ -119,12 +119,12 @@ const mutations = {
   changePassword: {
     type: UserChangePasswordPayload,
     args: {
-      input: {type: UserChangePasswordInput}
+      input: { type: UserChangePasswordInput }
     },
     resolve: async (obj, { input }, { user, loaders }) => {
-      const {oldPassword, password} = input;
+      const { oldPassword, password } = input;
 
-      if(!user) {
+      if (!user) {
         return {
           error: "User not authenticated."
         };
@@ -132,7 +132,7 @@ const mutations = {
 
       const isCorrectPassword = user.authenticate(oldPassword);
 
-      if(!isCorrectPassword) {
+      if (!isCorrectPassword) {
         return {
           error: "Invalid password."
         };
