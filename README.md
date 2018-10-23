@@ -1,6 +1,6 @@
 # crud-graphql-example
 
-GraphQL Server for a CRUD example using mongoose.
+Example of a CRUD using GraphQL and Mongoose.
 
 # Installation
 ```
