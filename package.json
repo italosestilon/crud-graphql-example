@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "config": "^2.0.1",
     "dataloader": "^1.4.0",
+    "dotenv": "^6.1.0",
     "graphql": "^14.0.2",
     "jsonwebtoken": "^8.3.0",
     "koa": "^2.5.3",

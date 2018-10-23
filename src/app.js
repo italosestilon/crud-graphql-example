@@ -3,20 +3,21 @@ import Koa from "koa";
 import graphqlHttp from "koa-graphql";
 import { schema } from "./schemas/schema";
 
-//getting data access configurations
-import config from "config";
-
 import mongoose from "mongoose";
 
 import createLoaders from "./loaders/index";
 
 import { getUser } from "./auth";
 
+import dotenv from 'dotenv';
+
+dotenv.load();
+
 const app = new Koa();
 
 //connecting to mongodb
 mongoose.connect(
-  config.dbHost,
+  process.env.MONGO_URL,
   {
     useNewUrlParser: true,
     useCreateIndex: true
@@ -43,5 +44,5 @@ const graphqlSettingsPerRequest = async req => {
 
 app.use(graphqlHttp(graphqlSettingsPerRequest));
 
-console.log(`Server listening on port ${config.port}`);
-app.listen(config.port);
+console.log(`Server listening on port ${process.env.PORT}`);
+app.listen(process.env.PORT);

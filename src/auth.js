@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import config from "config";
 import User from "./models/user";
 
 export async function getUser(token) {
@@ -8,7 +7,7 @@ export async function getUser(token) {
   }
 
   try {
-    const decoded = jwt.verify(token.substring(4), config.jwtSecret);
+    const decoded = jwt.verify(token.substring(4), process.env.JWT_KEY);
     const user = await User.findById(decoded.id);
 
     return {
@@ -23,5 +22,5 @@ export async function getUser(token) {
 }
 
 export function generateToken(user) {
-  return `JWT ${jwt.sign({ id: user.id }, config.jwtSecret)}`;
+  return `JWT ${jwt.sign({ id: user.id }, process.env.JWT_KEY)}`;
 }

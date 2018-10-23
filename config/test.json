@@ -1,6 +1,0 @@
-{
-    "dbHost": "localhost",
-    "dbName": "db",
-    "jwtSecret": "MyAwesomeSecret",
-    "env": "test"
-}
