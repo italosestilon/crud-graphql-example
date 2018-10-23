@@ -103,4 +103,62 @@ describe("Graphql API", async () => {
 
     expect(data).toMatchSnapshot();
   });
+
+  it("should not login with wrong password", async () => {
+    const user = new User({
+      name: "Lana Del Rey",
+      email: "delrey@email.com",
+      password: "veryGoodPassword"
+    });
+
+    await user.save();
+
+    const mutation = `
+      mutation {
+        loginWithEmail(input: {
+        email: "delrey@email.com",
+        password: "GoodPassword"
+      }){
+          token
+          error
+        }
+      }
+    `;
+
+    const rootValue = {};
+    const context = getContext({});
+    const result = await graphql(schema, mutation, rootValue, context);
+    const { data } = result;
+
+    expect(data).toMatchSnapshot();
+  });
+
+  it("should not login with wrong email", async () => {
+    const user = new User({
+      name: "Lana Del Rey",
+      email: "delrey@email.com",
+      password: "veryGoodPassword"
+    });
+
+    await user.save();
+
+    const mutation = `
+      mutation {
+        loginWithEmail(input: {
+        email: "lana@email.com",
+        password: "veryGoodPassword"
+      }){
+          token
+          error
+        }
+      }
+    `;
+
+    const rootValue = {};
+    const context = getContext({});
+    const result = await graphql(schema, mutation, rootValue, context);
+    const { data } = result;
+
+    expect(data).toMatchSnapshot();
+  });
 });

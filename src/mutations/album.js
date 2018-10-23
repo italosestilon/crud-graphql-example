@@ -14,7 +14,10 @@ const mutations = {
       artists: { type: new GraphQLList(GraphQLString) }
     },
 
-    resolve: async (obj, args) => {
+    resolve: async (obj, args, { user }) => {
+      if (!user) {
+        throw "Not authenticated";
+      }
       const album = new Album(args);
       try {
         await album.save();
@@ -41,7 +44,11 @@ const mutations = {
       artists: { type: new GraphQLList(GraphQLString) }
     },
 
-    resolve: async (obj, args, { loaders }) => {
+    resolve: async (obj, args, { loaders, user }) => {
+      if (!user) {
+        throw "Not authenticated";
+      }
+
       try {
         const album = await Album.findOneAndUpdate(args.id, args, {
           new: true
@@ -77,7 +84,11 @@ const mutations = {
       }
     },
 
-    resolve: async (obj, args, { loaders }) => {
+    resolve: async (obj, args, { loaders, user }) => {
+      if (!user) {
+        throw "Not authenticated";
+      }
+
       try {
         const album = await Album.findByIdAndDelete(args.id);
 

@@ -9,7 +9,7 @@ export async function getUser(token) {
 
   try {
     const decoded = jwt.verify(token.substring(4), config.jwtSecret);
-    const user = await User.FindById(decoded.id);
+    const user = await User.findById(decoded.id);
 
     return {
       user

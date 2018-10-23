@@ -1,5 +1,5 @@
 import Artist from "../models/artist";
-import Album from "../models/album";
+import User from "../models/user";
 import { graphql } from "graphql";
 
 import { schema } from "../schemas/schema";
@@ -93,7 +93,8 @@ describe("Graphql API", () => {
       `;
 
       const rootValue = {};
-      const context = getContext({});
+      //context should have an user to pass through authorization
+      const context = getContext({ user: { name: "User" } });
       const result = await graphql(schema, query, rootValue, context);
       const { data } = result;
 
@@ -117,7 +118,8 @@ describe("Graphql API", () => {
       }
       `;
       const rootValue = {};
-      const context = getContext({});
+      //context should have an user to pass through authorization       
+      const context = getContext({ user: { name: "User" } });
       const result = await graphql(schema, mutation, rootValue, context);
       const { data } = result;
 
@@ -152,7 +154,8 @@ describe("Graphql API", () => {
       }
       `;
       const rootValue = {};
-      const context = getContext({});
+      //context should have an user to pass through authorization
+      const context = getContext({user: {name: "User"}});
       const result = await graphql(schema, mutation, rootValue, context);
       const { data } = result;
 
@@ -185,7 +188,8 @@ describe("Graphql API", () => {
       }
       `;
       const rootValue = {};
-      const context = getContext({});
+      //context should have an user to pass through authorization
+      const context = getContext({ user: { name: "User" } });
       const result = await graphql(schema, mutation, rootValue, context);
       const { data } = result;
 

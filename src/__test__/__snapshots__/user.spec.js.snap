@@ -11,3 +11,21 @@ Object {
   },
 }
 `;
+
+exports[`Graphql API should not login with wrong email 1`] = `
+Object {
+  "loginWithEmail": Object {
+    "error": "Password or email are incorrect.",
+    "token": null,
+  },
+}
+`;
+
+exports[`Graphql API should not login with wrong password 1`] = `
+Object {
+  "loginWithEmail": Object {
+    "error": "Password or email are incorrect.",
+    "token": null,
+  },
+}
+`;

@@ -13,7 +13,10 @@ const mutations = {
       }
     },
 
-    resolve: async (obj, args) => {
+    resolve: async (obj, args, { user }) => {
+      if (!user) {
+        throw "Not authenticated";
+      }
       const artist = new Artist(args);
       try {
         return await artist.save();
@@ -37,7 +40,11 @@ const mutations = {
       }
     },
 
-    resolve: async (obj, args, { loaders }) => {
+    resolve: async (obj, args, { loaders, user }) => {
+      if (!user) {
+        throw "Not authenticated";
+      }
+
       try {
         const artist = await Artist.findOneAndUpdate({ _id: args.id }, args, {
           new: true
@@ -60,7 +67,11 @@ const mutations = {
         type: new GraphQLNonNull(GraphQLString)
       }
     },
-    resolve: async (obj, args, { loaders }) => {
+    resolve: async (obj, args, { loaders, user }) => {
+      if (!user) {
+        throw "Not authenticated";
+      }
+
       try {
         const artist = await Artist.findByIdAndDelete(args.id);
 
