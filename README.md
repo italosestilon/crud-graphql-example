@@ -12,8 +12,8 @@ npm i
 npm start
 ```
 # TODO
-- [] Improve tests
-- [] Use custom diretives for authorization
+- [ ] Improve tests
+- [ ] Use custom diretives for authorization
 
 # Dependencies
 ```
