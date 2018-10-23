@@ -43,7 +43,8 @@
     "prettier": "1.14.3"
   },
   "scripts": {
-    "babel": "nodemon --exec babel-node src/app.js",
+    "build": "babel src -d lib",
+    "start": "nodemon --exec babel-node src/app.js",
     "pretest": "eslint --fix --ignore-path .gitignore .",
     "test": "jest",
     "test:wacth": "jest --watch",

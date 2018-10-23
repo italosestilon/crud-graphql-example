@@ -18,8 +18,6 @@ const app = new Koa();
 mongoose.connect(
   config.dbHost,
   {
-    user: config.user,
-    pass: config.password,
     useNewUrlParser: true,
     useCreateIndex: true
   }
@@ -45,5 +43,5 @@ const graphqlSettingsPerRequest = async req => {
 
 app.use(graphqlHttp(graphqlSettingsPerRequest));
 
-//listen on port 3000
-app.listen(3000);
+console.log(`Server listening on port ${config.port}`);
+app.listen(config.port);
